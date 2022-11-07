@@ -19,9 +19,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         
-        <Route path='/cryptocurrencies' element={<Cryptocurrencies />}>
-          <Route path='/cryptocurrencies/:cryptoID' element={<Cryptocurrency />} />
-        </Route>
+        <Route path='/cryptocurrencies' element={<Cryptocurrencies />} />
+        
+        <Route path='/cryptocurrencies/:cryptoID' element={<Cryptocurrency />} />
         
         <Route path='/exchanges' element={<Exchanges />} />
 

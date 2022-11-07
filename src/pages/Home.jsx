@@ -4,6 +4,9 @@ import { Card, Container, Button, ListGroup, Badge } from "react-bootstrap";
 import axios from "axios";
 import millify from "millify";
 
+import Crypto from "../components/Crypto";
+import Statistics from "../components/Statistics";
+
 // const axios = require("axios").default;
 
 const Home = () => {
@@ -39,6 +42,7 @@ const Home = () => {
 
         setStatistics(response.data.data["stats"]);
         setCoins(response.data.data["coins"]);
+        // console.log(coins);
         
       })
       .catch(function (error) {
@@ -51,13 +55,13 @@ const Home = () => {
   return (
     <div className="container pt-5 pb-5">
       <div className="jumbotron ">
-        <h1 className="display-1">Hello, world!</h1>
+        <h1 className="display-1">Hello, Billionaires!</h1>
         <p className="lead">
-          This is a one stop home for all information about crytocurencies.{" "}
+          Welcome to the one stop home for all information about crytocurencies.{" "}
         </p>
         <hr className="my-4" />
         <p>
-          Information about cryptcurency prices, market trends, news, exchanges
+          Top cryptcurencies, Cryptcurency prices, Market trends, Crypto news, Exchanges
           and many more.
         </p>
       </div>
@@ -67,36 +71,12 @@ const Home = () => {
 
         <div className="row align-items-md-stretch mt-3">
           
-          <div className="col-md-4 mt-3 ">
-            <div className="h-100 p-3  border rounded-3">
-              <h3 className="display-7 lead">Total coins</h3>
-              <p className="fw-bold mb-0 fs-4">{millify(statistics.totalCoins, {precision: 2}) }</p>
-            </div>
-          </div>
-          <div className="col-md-4 mt-3 ">
-            <div className="h-100 p-3  border rounded-3">
-              <h3 className="display-7 lead">Total exchages</h3>
-              <p className="fw-bold mb-0 fs-4">{millify(statistics.totalExchanges)}</p>
-            </div>
-          </div>
-          <div className="col-md-4 mt-3 ">
-            <div className="h-100 p-3  border rounded-3">
-              <h3 className="display-7 lead">Total 24h volume</h3>
-              <p className="fw-bold mb-0 fs-4">{millify(statistics.total24hVolume, {precision: 3})}</p>
-            </div>
-          </div>
-          <div className="col-md-4 mt-3 ">
-            <div className="h-100 p-3  border rounded-3">
-              <h3 className="display-7 lead">Total markets</h3>
-              <p className="fw-bold mb-0 fs-4">{millify(statistics.totalMarkets, {precision: 2})}</p>
-            </div>
-          </div>
-          <div className="col-md-4 mt-3 ">
-            <div className="h-100 p-3  border rounded-3">
-              <h3 className="display-7 lead">Total market cap</h3>
-              <p className="fw-bold mb-0 fs-4">{millify(statistics.totalMarketCap)}</p>
-            </div>
-          </div>
+          <Statistics item={'Total coins'} figue={statistics.totalCoins}  />
+          <Statistics item={'Total exchages'} figue={statistics.totalExchanges} />
+          <Statistics item={'Total 24h volume'} figue={statistics.total24hVolume}  />
+          <Statistics item={'Total markets'} figue={statistics.totalMarkets}  />
+          <Statistics item={'Total market cap'} figue={statistics.totalMarketCap}  />
+
         </div>
 
       </div>
@@ -105,81 +85,11 @@ const Home = () => {
         <h2 className="pb-2 border-bottom">Top Cryptocurrencies</h2>
 
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-          <div className="col d-flex align-items-start">
-            <span
-              className="bi text-muted flex-shrink-0 me-3"
-              width="1.75em"
-              height="1.75em"
-            >
-              ico
-            </span>
-            <div>
-              <h3 className="fw-bold mb-0 fs-4">Featured title</h3>
-              <p>
-                Paragraph of text beneath the heading to explain the heading.
-              </p>
-            </div>
-          </div>
-          <div className="col d-flex align-items-start">
-            <span
-              className="bi text-muted flex-shrink-0 me-3"
-              width="1.75em"
-              height="1.75em"
-            >
-              ic
-            </span>
-            <div>
-              <h3 className="fw-bold mb-0 fs-4">Featured title</h3>
-              <p>
-                Paragraph of text beneath the heading to explain the heading.
-              </p>
-            </div>
-          </div>
-          <div className="col d-flex align-items-start">
-            <span
-              className="bi text-muted flex-shrink-0 me-3"
-              width="1.75em"
-              height="1.75em"
-            >
-              ic
-            </span>
-            <div>
-              <h3 className="fw-bold mb-0 fs-4">Featured title</h3>
-              <p>
-                Paragraph of text beneath the heading to explain the heading.
-              </p>
-            </div>
-          </div>
-          <div className="col d-flex align-items-start">
-            <span
-              className="bi text-muted flex-shrink-0 me-3"
-              width="1.75em"
-              height="1.75em"
-            >
-              ic
-            </span>
-            <div>
-              <h3 className="fw-bold mb-0 fs-4">Featured title</h3>
-              <p>
-                Paragraph of text beneath the heading to explain the heading.
-              </p>
-            </div>
-          </div>
-          <div className="col d-flex align-items-start">
-            <span
-              className="bi text-muted flex-shrink-0 me-3"
-              width="1.75em"
-              height="1.75em"
-            >
-              ic
-            </span>
-            <div>
-              <h3 className="fw-bold mb-0 fs-4">Featured title</h3>
-              <p>
-                Paragraph of text beneath the heading to explain the heading.
-              </p>
-            </div>
-          </div>
+          
+        <Crypto />
+        <Crypto />
+
+
         </div>
       </div>
 

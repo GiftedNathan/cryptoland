@@ -11,10 +11,10 @@ import {Container, Nav, Navbar, Button, NavDropdown} from 'react-bootstrap'
 const Navigationbar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-      <Container>
+      <Container className='d-flex justify-content-between'>
         <Navbar.Brand ><Link to={'/'}>logo</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="me-auto">
 
             <Link className='m-2' to={'/cryptocurrencies'}>

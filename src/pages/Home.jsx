@@ -1,11 +1,67 @@
 import React from 'react'
-import { ListGroup, Badge } from 'react-bootstrap'
+import { Card, Container, Button, ListGroup, Badge } from 'react-bootstrap'
 
 
 const Home = () => {
   return (
-    <div>
-      <ListGroup as="ol" className="d-flex flex-wrap " numbered>
+    <div className='container pt-5 pb-5' >
+
+      <div className="jumbotron py-5">
+        <h1 className="display-1">Hello, world!</h1>
+        <p className="lead">This is a one stop home for all information about crytocurencies. </p>
+        <hr className="my-4" />
+        <p>Information about cryptcurency prices, market trends, news, exchanges and many more.</p>
+      </div>
+
+      <div className="row bg-light mt-5 py-5 px-3">
+        <h1 className="display-6 lead">Cryptocurrency statistics</h1>
+     
+        <div class="row align-items-md-stretch mt-3">
+          
+          <div className="col-md-4 mt-3 ">
+            <div className="h-100 p-3  border rounded-3">
+              <h3>Special title</h3>
+              <p>43,232 </p>            
+            </div>
+          </div>
+          
+          <div className="col-md-4 mt-3 ">
+            <div className="h-100 p-3  border rounded-3">
+              <h3>Special title</h3>
+              <p>43,232 </p>            
+            </div>
+          </div>
+        </div>
+        
+        <h3 className="display-7 lead mt-5">More statistics</h3>
+      </div>
+
+
+      <div className="row bg-light mt-5 py-5 px-3">
+        <h1 className="display-6 lead">Top Cryptocurrencies</h1>
+     
+        <div class="row align-items-md-stretch mt-3">
+          
+          <div className="col-md-4 mt-3 ">
+            <div className="h-100 p-3  border rounded-3">
+              <h3>Special title</h3>
+              <p>43,232 </p>            
+            </div>
+          </div>
+          
+          <div className="col-md-4 mt-3 ">
+            <div className="h-100 p-3  border rounded-3">
+              <h3>Special title</h3>
+              <p>43,232 </p>            
+            </div>
+          </div>
+        </div>
+        
+        <h3 className="display-7 lead mt-5">More statistics</h3>
+      </div>
+
+
+      {/* <ListGroup as="ol" className="d-flex flex-wrap " numbered>
         <ListGroup.Item
           as="li"
           className="d-flex justify-content-between align-items-start w-25 m-5"
@@ -42,7 +98,7 @@ const Home = () => {
             14
           </Badge>
         </ListGroup.Item>
-      </ListGroup>
+      </ListGroup> */}
     </div>
   )
 }

@@ -3,6 +3,10 @@ import { Card, Container, Button, ListGroup, Badge } from 'react-bootstrap'
 
 
 const Home = () => {
+  
+
+
+
   return (
     <div className='container pt-5 pb-5' >
 

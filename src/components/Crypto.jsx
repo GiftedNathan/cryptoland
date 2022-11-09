@@ -9,7 +9,7 @@ const Crypto = ({name, symbol, price, id, iconUrl, color, ranking, marketCap  })
   
   
   return (
-    <div className="col d-flex align-items-start bg-light p-2 rounded" key={id}>
+    <div className="col d-flex align-items-start bg-light p-2 rounded" key={id} >
       <span
         className="bi text-muted flex-shrink-0 me-3"
         width="1.75em"
@@ -20,8 +20,8 @@ const Crypto = ({name, symbol, price, id, iconUrl, color, ranking, marketCap  })
       
       </span>
       <div>
-        <p className="fw-bold mb-2 fs-6">{name +' (' + symbol + ')'}</p>
-        <p className="mb-0">Price: { millify(price, {precision: 5}) +'$' }</p>
+        <p className="fw-bold mb-2 fs-6" style={{color: color  }}>{name +' (' + symbol + ')'}</p>
+        <p className="mb-0">Price: { '$' + millify(price, {precision: 5})  }</p>
         <p className="mb-0">Market Cap: { millify(marketCap) }</p>
         <p className="mb-0">Ranking: { millify(ranking) }</p>
       </div>

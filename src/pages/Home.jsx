@@ -39,7 +39,7 @@ const Home = () => {
       .request(options)
       .then(function (response) {
         // console.log(response.data.data["stats"]);
-        console.log(response.data.data['coins'][1]);
+        // console.log(response.data.data['coins'][1]);
 
         setStatistics(response.data.data["stats"]);
         setCoins(response.data.data["coins"]);
@@ -49,6 +49,7 @@ const Home = () => {
       .catch(function (error) {
         console.error(error);
       });
+      
   }, []);
 
 
@@ -90,6 +91,7 @@ const Home = () => {
         {/* <Crypto /> */}
         {
           coins.map((coin) => {
+            
             return(
 
               <Link  to={`/${coin.uuid}`} key={coin.uuid}>
@@ -101,7 +103,8 @@ const Home = () => {
                   marketCap={coin.marketCap}
                   ranking={coin.rank}
                   iconUrl={coin.iconUrl}
-                
+                  color={coin.color}
+
                 />
               </Link>
               

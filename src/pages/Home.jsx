@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Card, Container, Button, ListGroup, Badge } from "react-bootstrap";
 
 import axios from "axios";
@@ -38,7 +39,7 @@ const Home = () => {
       .request(options)
       .then(function (response) {
         // console.log(response.data.data["stats"]);
-        // console.log(response.data.data['coins']);
+        console.log(response.data.data['coins'][1]);
 
         setStatistics(response.data.data["stats"]);
         setCoins(response.data.data["coins"]);
@@ -86,8 +87,28 @@ const Home = () => {
 
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
           
-        <Crypto />
-        <Crypto />
+        {/* <Crypto /> */}
+        {
+          coins.map((coin) => {
+            return(
+
+              <Link  to={`/${coin.uuid}`} key={coin.uuid}>
+                <Crypto 
+                  id={coin.uuid} 
+                  name={coin.name} 
+                  symbol={coin.symbol}
+                  price={coin.price}
+                  marketCap={coin.marketCap}
+                  ranking={coin.rank}
+                  // iconUrl={coin.iconUrl}
+                
+                />
+              </Link>
+              
+
+            );
+          })
+        }
 
 
         </div>

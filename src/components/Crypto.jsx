@@ -21,7 +21,7 @@ const Crypto = ({name, symbol, price, id, iconUrl, color, ranking, marketCap  })
       </span>
       <div>
         <p className="fw-bold mb-2 fs-6">{name +' (' + symbol + ')'}</p>
-        <p className="mb-0">Price: { millify(price, {precision: 5}) }</p>
+        <p className="mb-0">Price: { millify(price, {precision: 5}) +'$' }</p>
         <p className="mb-0">Market Cap: { millify(marketCap) }</p>
         <p className="mb-0">Ranking: { millify(ranking) }</p>
       </div>

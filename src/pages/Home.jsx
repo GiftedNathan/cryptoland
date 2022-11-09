@@ -100,7 +100,7 @@ const Home = () => {
                   price={coin.price}
                   marketCap={coin.marketCap}
                   ranking={coin.rank}
-                  // iconUrl={coin.iconUrl}
+                  iconUrl={coin.iconUrl}
                 
                 />
               </Link>

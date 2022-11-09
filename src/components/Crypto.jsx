@@ -9,14 +9,15 @@ const Crypto = ({name, symbol, price, id, iconUrl, color, ranking, marketCap  })
   
   
   return (
-    <div className="col d-flex align-items-start" key={id}>
+    <div className="col d-flex align-items-start bg-light p-2 rounded" key={id}>
       <span
         className="bi text-muted flex-shrink-0 me-3"
         width="1.75em"
         height="1.75em"
       >
-        
-        <img src={iconUrl} alt="icon image"  width="1.75em" height="1.75em"/>
+      
+      <img src={iconUrl} alt="crypto image" style={{width: 40, height: 40}} />
+      
       </span>
       <div>
         <p className="fw-bold mb-2 fs-6">{name +' (' + symbol + ')'}</p>

@@ -39,7 +39,7 @@ const Cryptocurrency = () => {
           className="d-flex align-items-center text-dark text-decoration-none"
         >
           <img src={coin.iconUrl} alt="crypto icon" style={{width: 80, height: 80, marginRight: 10+'px', }} />
-          <span className="fs-4" >{coin.name +' (' + coin.symbol + ')'}</span>
+          <span className="fs-4" style={{color: coin.color, }}>{coin.name +' (' + coin.symbol + ')'}</span>
         </a>
       </header>
 

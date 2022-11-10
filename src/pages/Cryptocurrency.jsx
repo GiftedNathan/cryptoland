@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { render } from 'react-dom';
 
 import { useParams } from "react-router-dom";
 
@@ -45,7 +46,8 @@ const Cryptocurrency = () => {
       <main>
         {/* <h1>{coin.name}</h1> */}
         <div className="col-md-8">
-          {coin.description}
+          
+<div dangerouslySetInnerHTML={{ __html: coin.description }} />
         </div>
 
         

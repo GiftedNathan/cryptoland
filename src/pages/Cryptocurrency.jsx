@@ -38,16 +38,15 @@ const Cryptocurrency = () => {
           href="/"
           className="d-flex align-items-center text-dark text-decoration-none"
         >
-          <img src={coin.iconUrl} alt="crypto icon" style={{width: 80, height: 80 }} />
-        <span className="fs-4">{coin.name +' (' + coin.symbol + ')'}</span>
+          <img src={coin.iconUrl} alt="crypto icon" style={{width: 80, height: 80, marginRight: 10+'px', }} />
+          <span className="fs-4" >{coin.name +' (' + coin.symbol + ')'}</span>
         </a>
       </header>
 
       <main>
-        {/* <h1>{coin.name}</h1> */}
         <div className="col-md-8">
-          
-<div dangerouslySetInnerHTML={{ __html: coin.description }} />
+          {/* passing the string with html tags  */}
+          <div dangerouslySetInnerHTML={{ __html: coin.description }} />
         </div>
 
         
@@ -56,66 +55,54 @@ const Cryptocurrency = () => {
 
         <div className="row g-5">
           <div className="col-md-6">
-            <h2>Starter projects</h2>
+            <h2>{coin.name +' '} Stats</h2>
             <p>
-              Ready to beyond the starter template? Check out these open source
-              projects that you can quickly duplicate to a new GitHub
-              repository.
+              Latest statistics as at today
             </p>
             <ul className="icon-list ps-0">
-              <li className="d-flex align-items-start mb-1">
-                <a
-                  href="https://github.com/twbs/bootstrap-npm-starter"
-                  rel="noopener"
-                  target="_blank"
-                >
-                  Bootstrap npm starter
-                </a>
+              
+              <li className=" d-flex align-items-start mb-1">
+                Rank : {coin.rank}
               </li>
-              <li className="text-muted d-flex align-items-start mb-1">
-                Bootstrap Parcel starter (coming soon!)
+              <li className=" d-flex align-items-start mb-1">
+                Current price : {coin.price}
               </li>
+              
+              <li className=" d-flex align-items-start mb-1">
+                BTC price : {coin.btcPrice}
+              </li>
+              <li className=" d-flex align-items-start mb-1">
+                
+              </li>
+              
+              
             </ul>
           </div>
 
           <div className="col-md-6">
-            <h2>Guides</h2>
+            <h2>{coin.name +' '} Market info</h2>
             <p>
-              Read more detailed instructions and documentation on using or
-              contributing to Bootstrap.
+              See more detailed information about {coin.name +' (' + coin.symbol + ')'} in the market today.
             </p>
             <ul className="icon-list ps-0">
-              <li className="d-flex align-items-start mb-1">
-                <a href="/docs/5.2/getting-started/introduction/">
-                  Bootstrap quick start guide
-                </a>
+              <li className=" d-flex align-items-start mb-1">
+                Market cap : {coin.marketCap}
               </li>
-              <li className="d-flex align-items-start mb-1">
-                <a href="/docs/5.2/getting-started/webpack/">
-                  Bootstrap Webpack guide
-                </a>
+              <li className=" d-flex align-items-start mb-1">
+                Number of exchanges : {coin.numberOfExchanges}
               </li>
-              <li className="d-flex align-items-start mb-1">
-                <a href="/docs/5.2/getting-started/parcel/">
-                  Bootstrap Parcel guide
-                </a>
+              <li className=" d-flex align-items-start mb-1">
+                Number of markets : {coin.numberOfMarkets}
               </li>
-              <li className="d-flex align-items-start mb-1">
-                <a href="/docs/5.2/getting-started/vite/">
-                  Bootstrap Vite guide
-                </a>
-              </li>
-              <li className="d-flex align-items-start mb-1">
-                <a href="/docs/5.2/getting-started/contribute/">
-                  Contributing to Bootstrap
-                </a>
+              <li className=" d-flex align-items-start mb-1">
+                Web site : {coin.websiteUrl}
               </li>
             </ul>
           </div>
         </div>
       </main>
       <footer className="pt-5 my-5 text-muted border-top">
-        Created by the Bootstrap team &middot; &copy; 2022
+        Created by Nathan with much love &middot; &copy; 2022
       </footer>
     </div>
   );

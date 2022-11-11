@@ -27,11 +27,11 @@ const Navigationbar = () => {
               </Button>
             </Link>
 
-            <Link className='m-2' to={'/exchanges'}>
+            {/* <Link className='m-2' to={'/exchanges'}>
               <Button variant="secondary">
                 Exchanges
               </Button>
-            </Link>
+            </Link> */}
 
             <Link className='m-2' to={'/news'}>
               <Button variant="secondary">

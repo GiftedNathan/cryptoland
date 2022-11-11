@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Cryptocurrencies from './pages/Cryptocurrencies'
 import Cryptocurrency from './pages/Cryptocurrency'
 import Exchanges from './pages/Exchanges'
+import News from './pages/News'
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
         <Route path='/:cryptoID' element={<Cryptocurrency />} />
         
         <Route path='/exchanges' element={<Exchanges />} />
+
+        <Route path='/news' element={<News />} />
 
       </Routes>
 

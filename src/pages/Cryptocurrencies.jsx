@@ -6,6 +6,7 @@ import Crypto from '../components/Crypto';
 const Cryptocurrencies = () => {
 
   const [coins, setCoins] = useState([]);
+  const [search, setSearch] = useState('');
 
   const options = {
     method: "GET",
@@ -45,6 +46,13 @@ const Cryptocurrencies = () => {
 
     <div className="container px-4 py-5" id="icon-grid">
       <h2 className="pb-2 border-bottom">Cryptocurrencies</h2>
+
+      <div className="container-fluid d-flex justify-content-center">
+        <form className="form col-md-8 mt-5 text-center d-flex justify-content-center">
+          <input onChange={(e) => setSearch(e.target.value)} className="form-control form-control-lg " type="text" placeholder="Search Crypto" aria-label=".form-control-lg example" />
+        </form>
+
+      </div>
 
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
 

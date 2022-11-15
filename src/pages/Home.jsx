@@ -15,6 +15,8 @@ const Home = () => {
   const noOfStatistics = Object.keys(statistics).length; // getting the number of items in the object
 
   const [coins, setCoins] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+  const [runtimeError, setRuntimeError] = useState();
 
   const options = {
     method: "GET",
@@ -40,13 +42,15 @@ const Home = () => {
       .then(function (response) {
         // console.log(response.data.data["stats"]);
         // console.log(response.data.data['coins'][1]);
-
+        setIsLoading(true)
         setStatistics(response.data.data["stats"]);
         setCoins(response.data.data["coins"]);
         // console.log(coins);
+        setIsLoading(false)
         
       })
       .catch(function (error) {
+        // setRuntimeError(console.error(error))
         console.error(error);
       });
       
@@ -70,15 +74,17 @@ const Home = () => {
 
       <div className="row bg-light mt-5 py-5 px-3">
         <h1 className="display-6 lead">Cryptocurrency statistics</h1>
+          
+        <div className="container d-flex justify-content-center lead fs-5 fw-b">
+          { isLoading ? ' Hold on while i load your requested information' : '' }
+        </div>
 
         <div className="row align-items-md-stretch mt-3">
-          
           <Statistics item={'Total coins'} figue={statistics.totalCoins}  />
           <Statistics item={'Total exchages'} figue={statistics.totalExchanges} />
           <Statistics item={'Total 24h volume'} figue={statistics.total24hVolume}  />
           <Statistics item={'Total markets'} figue={statistics.totalMarkets}  />
           <Statistics item={'Total market cap'} figue={statistics.totalMarketCap}  />
-
         </div>
 
       </div>
@@ -86,8 +92,11 @@ const Home = () => {
       <div className="container px-4 py-5" id="icon-grid">
         <h2 className="pb-2 border-bottom">Top Cryptocurrencies</h2>
 
+        <div className="container d-flex justify-content-center lead fs-5 fw-b">
+          { isLoading ? ' Hold on while i load your requested information' : '' }
+        </div>  
+
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-          
         {/* <Crypto /> */}
         {
           coins.map((coin) => {
@@ -155,6 +164,8 @@ const Home = () => {
           </Badge>
         </ListGroup.Item>
       </ListGroup> */}
+
+      
     </div>
   );
 };

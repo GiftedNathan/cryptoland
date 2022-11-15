@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css'
 
 import Navigationbar from './components/Navigationbar';
+import Footer from './components/Footer';
 
 import { Button, Badge } from 'react-bootstrap';
 import Home from './pages/Home';
@@ -30,6 +31,7 @@ function App() {
 
       </Routes>
 
+      <Footer />
       
     </div>
   )

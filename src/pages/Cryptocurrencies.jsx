@@ -7,6 +7,7 @@ const Cryptocurrencies = () => {
 
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
 
   const options = {
     method: "GET",
@@ -30,16 +31,17 @@ const Cryptocurrencies = () => {
     axios
       .request(options)
       .then(function (response) {
+        setIsLoading(true)
         setCoins(response.data.data["coins"]);
-
+        setIsLoading(false)
       })
       .catch(function (error) {
         console.error(error);
       });
   }, []);
 
-
-
+  
+  console.log(search);
 
   return (
 
@@ -53,14 +55,21 @@ const Cryptocurrencies = () => {
         </form>
 
       </div>
-
+      <div className="container d-flex justify-content-center lead fs-5 fw-b">
+        { isLoading ===  true ? ' Hold on while i load your requested information' : '' }
+      </div>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
 
         {/* <Crypto /> */}
         {
-          coins.map((coin) => {
+          
+          coins.filter((coin) => {
+            return search.toLowerCase() === "" 
+              ? coin 
+              : coin.name.toLowerCase().includes(search);
+          })
+          .map((coin) => {
             return(
-
               <Link  to={`/${coin.uuid}`} key={coin.uuid}>
                 <Crypto 
                   id={coin.uuid} 
@@ -70,7 +79,7 @@ const Cryptocurrencies = () => {
                   marketCap={coin.marketCap}
                   ranking={coin.rank}
                   iconUrl={coin.iconUrl}
-                
+                  color={coin.color}
                 />
               </Link>
               

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import millify from "millify";
 import { render } from 'react-dom';
+import {Badge} from 'react-bootstrap';
 
 import { useParams } from "react-router-dom";
 
@@ -23,7 +25,7 @@ const Cryptocurrency = () => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data.data.coin);
+        // console.log(response.data.data.coin);
         setCoin(response.data.data.coin);
       })
       .catch(function (error) {
@@ -62,14 +64,15 @@ const Cryptocurrency = () => {
             <ul className="icon-list ps-0">
               
               <li className=" d-flex align-items-start mb-1">
-                Rank : {coin.rank}
+                Rank : <Badge style={{backgroundColor: coin.color, marginLeft: 5, }}>{ ' ' + coin.rank}</Badge> 
               </li>
               <li className=" d-flex align-items-start mb-1">
-                Current price : {coin.price}
+                Current price : ${ millify(coin.price, {precision: 12}) }
+                
               </li>
               
               <li className=" d-flex align-items-start mb-1">
-                BTC price : {coin.btcPrice}
+                BTC price : ${  millify(coin.btcPrice, {precision: 12}) }
               </li>
               <li className=" d-flex align-items-start mb-1">
                 
@@ -86,7 +89,7 @@ const Cryptocurrency = () => {
             </p>
             <ul className="icon-list ps-0">
               <li className=" d-flex align-items-start mb-1">
-                Market cap : {coin.marketCap}
+                Market cap : ${ millify(coin.marketCap, {precision: 5}) }
               </li>
               <li className=" d-flex align-items-start mb-1">
                 Number of exchanges : {coin.numberOfExchanges}
@@ -95,15 +98,13 @@ const Cryptocurrency = () => {
                 Number of markets : {coin.numberOfMarkets}
               </li>
               <li className=" d-flex align-items-start mb-1">
-                Web site : {coin.websiteUrl}
+                Web site : <a href={coin.websiteUrl} target="_blank" rel="noopener noreferrer">{coin.websiteUrl}</a>
               </li>
             </ul>
           </div>
         </div>
       </main>
-      <footer className="pt-5 my-5 text-muted border-top">
-        Created by Nathan with much love &middot; &copy; 2022
-      </footer>
+      
     </div>
   );
 };

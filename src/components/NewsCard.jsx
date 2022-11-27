@@ -10,7 +10,7 @@ const NewsCard = ({id, name, snippet, url, dateLastCrawled, language }) => {
         //             <p className="card-text"><small>Last updated 3 mins ago</small></p>
         //         </div>
         // </div>
-        <div className="col-md-6" key={id}>
+        <div className="col-md-4" key={id}>
             <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div className="col p-4 d-flex flex-column position-static">
                     <strong className="d-inline-block mb-2 text-primary">{language}</strong>

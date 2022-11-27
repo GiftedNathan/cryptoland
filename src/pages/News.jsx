@@ -1,27 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+import NewsCard from '../components/NewsCard';
 
 
 const News = () => {
 
+    const [news, setNews] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
+
     const options = {
         method: 'GET',
-        url: 'https://bing-news-search1.p.rapidapi.com/news',
-        params: { safeSearch: 'Off', textFormat: 'Raw' },
+        
+        url: 'https://bing-web-search1.p.rapidapi.com/search',
+        params: { q: 'Cryptocurrency', count: '20', mkt: 'en-us', safeSearch: 'Off', textFormat: 'Raw', freshness: 'Day' },
         headers: {
             'X-BingApis-SDK': 'true',
             'X-RapidAPI-Key': 'cefbab10f2msh7a1be607a45cd2cp186b69jsn5983f1e48100',
-            'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
+            'X-RapidAPI-Host': 'bing-web-search1.p.rapidapi.com'
         }
     };
 
-    axios.request(options).then(function (response) {
-        console.log(response.data);
-    }).catch(function (error) {
-        console.error(error);
-    });
-
+    
     useEffect(() => {
+        setLoading(true);
+        
+        axios.request(options).then(function (response) {
+            setNews(response.data.webPages.value);
+            setLoading(false);
+
+            // console.log(response.data.webPages.value);
+
+        }).catch(function (error) {
+            console.error(error);
+        });
 
 
     }, [])
@@ -49,43 +62,34 @@ const News = () => {
             <main className="container">
                 <div className="p-4 p-md-5 mb-4 rounded text-bg-dark">
                     <div className="col-md-6 px-0">
-                        <h1 className="display-4 fst-italic">This page is still in development; wait a little more</h1>
-                        <p className="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-                        <p className="lead mb-0"><a href="#" className="text-white fw-bold">Continue reading...</a></p>
+                        <h1 className="display-4 fst-italic">{news[2].name}</h1>
+                        <p className="lead my-3">{news[2].snippet}</p>
+                        <p className="lead mb-0"><a href={news[2].url} className="text-white fw-bold">Continue reading...</a></p>
                     </div>
                 </div>
 
                 <div className="row mb-2">
-                    <div className="col-md-6">
-                        <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                            <div className="col p-4 d-flex flex-column position-static">
-                                <strong className="d-inline-block mb-2 text-primary">World</strong>
-                                <h3 className="mb-0">Featured post</h3>
-                                <div className="mb-1 text-muted">Nov 12</div>
-                                <p className="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" className="stretched-link">Continue reading</a>
-                            </div>
-                            <div className="col-auto d-none d-lg-block">
-                                <svg className="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    {
+                        news.map( (item) => {
+                            
+                            return(
+                                <Link  to={item.url} key={item.id}>
+                                    <NewsCard
+                                        id = {item.id}
+                                        name = {item.name}
+                                        snippet = {item.snippet}
+                                        url = {item.url}
+                                        dateLastCrawled = {item.dateLastCrawled}
+                                        language = {item.language}
+                                    />
+                                </Link>
+                            );
 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-6">
-                        <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                            <div className="col p-4 d-flex flex-column position-static">
-                                <strong className="d-inline-block mb-2 text-success">Design</strong>
-                                <h3 className="mb-0">Post title</h3>
-                                <div className="mb-1 text-muted">Nov 11</div>
-                                <p className="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" className="stretched-link">Continue reading</a>
-                            </div>
-                            <div className="col-auto d-none d-lg-block">
-                                <svg className="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
 
-                            </div>
-                        </div>
-                    </div>
+                        })
+
+                    }
+                    
                 </div>
 
                 <div className="row g-5">

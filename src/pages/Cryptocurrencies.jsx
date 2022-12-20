@@ -3,48 +3,24 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Crypto from '../components/Crypto';
 
+import { useDispatch, useSelector } from "react-redux";
+import fetchCoins from '../app/cryptoSlice'
+
 const Cryptocurrencies = () => {
 
-  const [coins, setCoins] = useState([]);
-  const [search, setSearch] = useState('');
-  const [isLoading, setIsLoading] = useState(false)
+  const coins = useSelector( (state) => state.cryptos);
 
-  const options = {
-    method: "GET",
-    url: "https://coinranking1.p.rapidapi.com/coins",
-    params: {
-      referenceCurrencyUuid: "yhjMzLPhuIDl",
-      timePeriod: "24h",
-      "tiers[0]": "1",
-      orderBy: "marketCap",
-      orderDirection: "desc",
-      limit: "50",
-      offset: "0",
-    },
-    headers: {
-      "X-RapidAPI-Key": "cefbab10f2msh7a1be607a45cd2cp186b69jsn5983f1e48100",
-      "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
-    },
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .request(options)
-      .then(function (response) {
-        setIsLoading(true)
-        setCoins(response.data.data["coins"]);
-        setIsLoading(false)
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    dispatch( fetchCoins() );
   }, []);
-
   
-  console.log(search);
+  
+  console.log(fetchCoins());
+  // console.log(search);
 
   return (
-
 
     <div className="container px-4 py-5" id="icon-grid">
       <h2 className="pb-2 border-bottom">Cryptocurrencies</h2>
@@ -56,14 +32,14 @@ const Cryptocurrencies = () => {
 
       </div>
       <div className="container d-flex justify-content-center lead fs-5 fw-b">
-        { isLoading ===  true ? ' Hold on while i load your requested information' : '' }
+        { coins.isLoading ===  true ? ' Hold on while i load your requested information' : '' }
       </div>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
 
         {/* <Crypto /> */}
         {
           
-          coins.filter((coin) => {
+          coins.cryptoData.filter((coin) => {
             return search.toLowerCase() === "" 
               ? coin 
               : coin.name.toLowerCase().includes(search);

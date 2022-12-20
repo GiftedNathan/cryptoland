@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import cyptoSlice from './cryptoSlice';
 
-export default configureStore ({
+export const store = configureStore ({
     reducer : {
-        
-    }
+        cryptos: cyptoSlice,
+    },
 });

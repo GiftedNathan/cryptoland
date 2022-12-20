@@ -3,7 +3,7 @@ import axios from "axios";
 
 const options = {
     method: "GET",
-    url: "https://coinranking1.p.rapidapi.com/coins",
+    // url: "https://coinranking1.p.rapidapi.com/coins",
     params: {
         referenceCurrencyUuid: "yhjMzLPhuIDl",
         timePeriod: "24h",
@@ -21,46 +21,47 @@ const options = {
 
 export const getCryptocurrencies = createAsyncThunk(
     'cryptocurrencies/getCryptocurrencies',
-    async () => {
+    async (options, thunkAPI) => {
         try {
-            const response = await axios.request(options);
-            console.log('/////////////' + response.data.data["coins"])
-            return response.data.data["coins"];
-
+          const response = await axios.get('https://coinranking1.p.rapidapi.com/coins', options);
+          console.log(response.data);
+          return response.data;
         } catch (error) {
-            console.error(error);
+          return thunkAPI.rejectWithValue(error);
         }
-    }
+      }
 );
+getCryptocurrencies();
 
-const cryptocurrenciessSlice  = createSlice ({
+export const cryptocurrenciessSlice  = createSlice ({
     name: 'crytocurrencies',
     initialState: {
-        cryptoData: {},
+        cryptoData: [],
         isLoading: false,
         hasError: false
     },
+    reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getCryptocurrencies.pending, (state, action) => {
-                state.isLoading = true;
-                state.hasError = false;
-            })
-            .addCase(getCryptocurrencies.fulfilled, (state, action) => {
-                state.cryptoData = action.payload;
-                state.isLoading = false;
-                state.hasError = false;
-            })
-            .addCase(getCryptocurrencies.rejected, (state, action) => {
-                state.isLoading = false;
-                state.hasError = false;
-            })
+        .addCase(getCryptocurrencies.pending, (state, action) => {
+            state.isLoading = true;
+            state.hasError = false;
+        })
+        .addCase(getCryptocurrencies.fulfilled, (state, action) => {
+            state.cryptoData = action.payload;
+            state.isLoading = false;
+            state.hasError = false;
+        })
+        .addCase(getCryptocurrencies.rejected, (state, action) => {
+            state.isLoading = false;
+            state.hasError = false;
+        })
     }
 });
 
 // selectors
-export const selectCryptoData = state => state.cryptocurrencies.cryptoData;
-export const selectLoadingState = state => state.cryptocurrencies.isLoading;
-export const selectErrorState = state => state.getCryptocurrencies.hasError;
+// export const selectCryptoData = state => state.cryptocurrencies.cryptoData;
+// export const selectLoadingState = state => state.cryptocurrencies.isLoading;
+// export const selectErrorState = state => state.getCryptocurrencies.hasError;
 
-export default cryptocurrenciessSlice;
+export default cryptocurrenciessSlice.reducer;

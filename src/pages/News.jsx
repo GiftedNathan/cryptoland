@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useReducer } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import NewsCard from '../components/NewsCard';
+import { INITIAL_STATE, newsReducer } from './NewReducer';
 
 
 const News = () => {
 
-    const [news, setNews] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState();
+    const [state, dispatch] = useReducer (newsReducer,  INITIAL_STATE)
+
+    // const [news, setNews] = useState([]);
+    // const [loading, setLoading] = useState(false);
+    // const [error, setError] = useState();
 
     const options = {
         method: 'GET',
@@ -23,23 +26,28 @@ const News = () => {
     };
 
     
-    useEffect(() => {
-        setLoading(true);
-        
-        axios.request(options).then(function (response) {
-            setNews(response.data.webPages.value);
-            setLoading(false);
+    useEffect (() => {
+        // setLoading(true);
+        dispatch({type: 'FETCH_LOADING'});
 
+        axios.request(options).then(function (response) {
+            // setNews(response.data.webPages.value);
+            // setLoading(false);
+            dispatch({type: 'FETCH_SUCCESS', payload: response.data.webPages.value})
             // console.log(response.data.webPages.value);
+            console.log(state);
 
         }).catch(function (error) {
-            console.error(error);
+            dispatch({type: 'FETCH_ERROR'});
+            // console.error(error);
         });
 
 
     }, [])
 
-
+    console.log(state.loading + 'one');
+    console.log(state.newsData);
+    console.log(state.loading + 'two');
 
 
     return (
@@ -49,15 +57,15 @@ const News = () => {
             <main className="container mt-5">
                 <div className="p-4 p-md-5 mb-4 rounded text-bg-dark">
                     <div className="col-md-12 px-0">
-                        <h1 className="display-4 fst-italic">{news[2]?.name}</h1>
-                        <p className="lead my-3">{news[2]?.snippet}</p>
-                        <p className="lead mb-0"><a href={news[2]?.url} className="text-white fw-bold">Continue reading...</a></p>
+                        <h1 className="display-4 fst-italic">{state.loading ? " ...loading" : state.newsData[2]?.name}</h1>
+                        <p className="lead my-3">{state.loading? " ...loading" : state.newsData[2]?.snippet}</p>
+                        <p className="lead mb-0"><a href={state.newsData[2]?.url} className="text-white fw-bold">{state.loading ? " ...loading" : "Continue reading..."}</a></p>
                     </div>
                 </div>
 
                 <div className="row mb-2 d-flex justify-content-center align-items-center">
                     {
-                        news.map( (item) => {
+                        state.newsData?.map( (item) => {
                             
                             return(
                                 <Link  to={item.url} key={item.id}>
@@ -75,7 +83,7 @@ const News = () => {
                         })
 
                     }
-                    
+                    <span>{state.error && "Something went wrong"}</span>
                 </div>
 
                 <div className="row g-5">
